@@ -5,6 +5,8 @@ import Header from "./components/Header/Header";
 import TaskForm from "./components/TaskForm/TaskForm";
 import TaskList from "./components/TaskList/TaskList";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [form, setForm] = useState({
@@ -22,7 +24,7 @@ export default function App() {
     try {
       setLoading(true);
       const q = filter === "all" ? "" : `?status=${filter}`;
-      const res = await fetch(`/api/tasks${q}`);
+      const res = await fetch(`${API_URL}/api/tasks${q}`);
       if (res.ok) {
         const data = await res.json();
         setTasks(data);
@@ -45,7 +47,7 @@ export default function App() {
     if (!form.title.trim()) return;
 
     try {
-      await fetch("/api/tasks", {
+      await fetch(`${API_URL}/api/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -62,7 +64,6 @@ export default function App() {
      TOGGLE COMPLETE
   ====================== */
   const toggleTask = async (task) => {
-    // Optimistic UI
     setTasks((prev) =>
       prev.map((t) =>
         t._id === task._id ? { ...t, completed: !t.completed } : t
@@ -70,7 +71,7 @@ export default function App() {
     );
 
     try {
-      await fetch(`/api/tasks/${task._id}`, {
+      await fetch(`${API_URL}/api/tasks/${task._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ completed: !task.completed }),
@@ -85,11 +86,12 @@ export default function App() {
      DELETE TASK
   ====================== */
   const deleteTask = async (id) => {
-    // Optimistic delete
     setTasks((prev) => prev.filter((t) => t._id !== id));
 
     try {
-      await fetch(`/api/tasks/${id}`, { method: "DELETE" });
+      await fetch(`${API_URL}/api/tasks/${id}`, {
+        method: "DELETE",
+      });
     } catch (err) {
       console.error("Delete failed", err);
       loadTasks();
@@ -97,11 +99,11 @@ export default function App() {
   };
 
   /* ======================
-     UPDATE TASK (EDIT MODAL)
+     UPDATE TASK
   ====================== */
   const updateTask = async (id, updatedData) => {
     try {
-      await fetch(`/api/tasks/${id}`, {
+      await fetch(`${API_URL}/api/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
@@ -112,14 +114,8 @@ export default function App() {
     }
   };
 
-  /* ======================
-     DERIVED STATE
-  ====================== */
   const pendingCount = tasks.filter((t) => !t.completed).length;
 
-  /* ======================
-     UI
-  ====================== */
   return (
     <Layout>
       <Sidebar pendingCount={pendingCount} />
