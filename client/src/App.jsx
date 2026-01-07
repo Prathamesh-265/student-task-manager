@@ -6,6 +6,7 @@ import TaskForm from "./components/TaskForm/TaskForm";
 import TaskList from "./components/TaskList/TaskList";
 
 const API_URL = import.meta.env.VITE_API_URL;
+console.log("API_URL =", import.meta.env.VITE_API_URL);
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
