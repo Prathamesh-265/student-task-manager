@@ -1,0 +1,157 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 24px;
+}
+
+/* =========================
+   BACKGROUND BLOBS
+========================= */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 420px;
+  height: 420px;
+  background: #a5b4fc;
+  top: -120px;
+  left: -120px;
+}
+
+.blob-2 {
+  width: 320px;
+  height: 320px;
+  background: #fbcfe8;
+  bottom: -80px;
+  right: -80px;
+}
+
+/* =========================
+   GLASS PANEL
+========================= */
+.glass-panel {
+  width: 100%;
+  max-width: 980px;
+  height: 85vh;
+  display: flex;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(140%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  overflow: hidden;
+  animation: fadeUp 0.45s var(--ease-out);
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .glass-panel {
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .main-content {
+    padding: 24px;
+  }
+
+  .blob {
+    display: none;
+  }
+}
+
+/* =========================
+   REAL BIDIRECTIONAL THEME REVEAL
+   (FIXED & SMOOTH)
+========================= */
+.theme-transition {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  background: #020617;
+
+  clip-path: circle(0% at 100% 100%);
+  opacity: 0;
+
+  transition: opacity 180ms ease;
+}
+
+/* DARK MODE REVEAL */
+.theme-transition[data-mode="dark"].active {
+  opacity: 1;
+  animation: revealDark 420ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* LIGHT MODE REVEAL */
+.theme-transition[data-mode="light"].active {
+  background: #f8fafc;
+  opacity: 1;
+  animation: revealLight 420ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes revealDark {
+  from {
+    clip-path: circle(0% at 100% 100%);
+  }
+  to {
+    clip-path: circle(150% at 0% 0%);
+  }
+}
+
+@keyframes revealLight {
+  from {
+    clip-path: circle(150% at 0% 0%);
+  }
+  to {
+    clip-path: circle(0% at 100% 100%);
+  }
+}
+
+/* =========================
+   THEME TOGGLE BUTTON
+========================= */
+.theme-toggle {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-main);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.18s ease;
+  z-index: 10000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.08);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}

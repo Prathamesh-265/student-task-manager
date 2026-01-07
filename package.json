@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "framer-motion": "^12.24.7",
+    "react-icons": "^5.5.0"
+  }
+}

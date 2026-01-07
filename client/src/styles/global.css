@@ -1,0 +1,158 @@
+/* =========================
+   GLOBAL DESIGN TOKENS
+========================= */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #f8fafc;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.6);
+
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-glow: rgba(79, 70, 229, 0.35);
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  --border: #e2e8f0;
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================
+   BASE RESET
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  color: var(--text-main);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+
+  transition:
+    background 420ms ease,
+    color 300ms ease;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   DARK MODE VARIABLES
+========================= */
+body.dark {
+  --bg: #020617;
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-glow: rgba(129, 140, 248, 0.45);
+
+  --text-main: #e5e7eb;
+  --text-muted: #94a3b8;
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+
+  background: radial-gradient(
+    circle at bottom right,
+    #020617 0%,
+    #020617 60%,
+    #020617 100%
+  );
+
+  /* ✅ THIS FIXES WEIRD DARK MODE CONTROLS */
+  color-scheme: dark;
+}
+
+/* =========================
+   SURFACE COLOR FIXES
+========================= */
+body.dark .glass-panel,
+body.dark .sidebar,
+body.dark .stats-card,
+body.dark .task-row,
+body.dark .filter-pill,
+body.dark .composer {
+  background: rgba(15, 23, 42, 0.88);
+  color: var(--text-main);
+}
+
+/* =========================
+   SMOOTH THEME TRANSITIONS
+   (IMPORTANT)
+========================= */
+body,
+.glass-panel,
+.sidebar,
+.stats-card,
+.task-row,
+.filter-pill,
+.composer {
+  transition:
+    background-color 320ms ease,
+    color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+
+.pill-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%2364748b' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+
+  padding-right: 36px;
+}
+
+/* Dark mode */
+body.dark .pill-select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%2394a3b8' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+

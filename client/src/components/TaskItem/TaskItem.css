@@ -1,0 +1,141 @@
+.task-row {
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    background-color 300ms ease,
+    border-color 300ms ease;
+  animation: slideIn 0.35s var(--ease-out);
+}
+
+.task-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+}
+
+.task-row.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+.checkbox-wrapper {
+  background: none;
+  border: none;
+  font-size: 22px;
+  margin-right: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-unchecked {
+  color: #94a3b8;
+}
+
+.icon-checked {
+  color: var(--success);
+}
+
+/* =========================
+   CONTENT
+========================= */
+.task-details {
+  flex: 1;
+}
+
+.task-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.priority-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.priority-dot.low {
+  background: var(--success);
+}
+
+.priority-dot.medium {
+  background: var(--warning);
+}
+
+.priority-dot.high {
+  background: var(--danger);
+}
+
+.date-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.divider {
+  margin: 0 4px;
+}
+
+/* =========================
+   ACTION BUTTON
+========================= */
+.action-btn {
+  opacity: 0;
+  transform: translateX(8px);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s var(--ease-out),
+    color 200ms ease;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-row:hover .action-btn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-btn:hover {
+  color: var(--danger);
+}
+
+.delete-btn {
+  margin-left: 8px;
+}
+
+/* =========================
+   DARK MODE REFINEMENTS
+========================= */
+body.dark .task-row:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+}
+
+body.dark .icon-unchecked {
+  color: #64748b;
+}
